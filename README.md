@@ -1,4 +1,4 @@
-## How to integrate Form builder in your React (create-react-app) app:
+## How to integrate Form builder into your React (create-react-app) app:
 
 1. [Create React App](https://github.com/facebook/create-react-app).
 2. Copy folders: ```css```, ```images```, ```scripts``` from folder ```public``` to folder ```public``` in your react app, and folder ```src/optimajet-builder.js``` to ```src```
