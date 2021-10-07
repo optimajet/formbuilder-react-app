@@ -2,6 +2,7 @@ import React from "react";
 import { DWKitFormBuilder, DWKitFormViewer } from "./optimajet-builder";
 import { builderProps, viewerProps } from "./builder-viewer-props";
 
+const HideIf = ({ condition, ...props }) => <div style={{ display: condition ? "none" : "initial" }} {...props} />
 
 class App extends React.Component {
 
@@ -15,25 +16,33 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.builderRef?.current?.load('./application-form');
+    this.setState({ dataurl: "./application-form-data.json" })
+  };
+
   toggleViewMode = () => {
     const model = this.builderRef?.current?.getData();
     this.setState({ showViewer: !this.state.showViewer, model })
   }
 
   render() {
-    const { model, showViewer } = this.state;
-    const buttons = [
-      { name: "viewer", className: "ui button primary", onClick: this.toggleViewMode, text: showViewer ? "Show Builder" : "Show Viewer"}
-    ]
+    const { model, showViewer, dataurl } = this.state;
+    const headerProps = { style: { display: "flex", justifyContent: "center", margin: 10 } };
+    const buttonProps = {
+      className: "ui button primary",
+      onClick: this.toggleViewMode,
+      children: showViewer ? "Show Builder" : "Show Viewer"
+    };
+
+
     return (
       <div className="App">
-        <div style={{display: "flex", justifyContent: "center", margin: 10}}>
-          <button {...buttons[0]}>{buttons[0].text}</button>
-        </div>
-        {showViewer 
-          ? <DWKitFormViewer {...viewerProps} model={model} />
-          : <DWKitFormBuilder {...builderProps} ref={this.builderRef}/>
-        }
+        <div {...headerProps}> <button {...buttonProps} /> </div>
+        {showViewer && <DWKitFormViewer {...{ ...viewerProps, model, dataurl }} />}
+        <HideIf condition={showViewer}>
+          <DWKitFormBuilder {...builderProps} model={model} ref={this.builderRef} />
+        </HideIf>
       </div>
     );
   }

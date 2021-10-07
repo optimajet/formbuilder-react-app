@@ -2,6 +2,15 @@ const builderProps = {
   showHeader: true,
   downloadUrl: "download.html?file=",
   uploadUrl: "upload.html?file=",
+  
+  getFormFunc: (formname) => {
+    var formurl = formname + ".json";
+    var source = $.ajax({
+      url: formurl,
+      async: false,
+    }).responseJSON;
+    return source;
+  },
 
   getAdditionalDataForControl:
     (control, { startIndex, pageSize, model }, callback) => {
