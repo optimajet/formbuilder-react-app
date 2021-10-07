@@ -3,7 +3,7 @@
 1. [Create React App](https://github.com/facebook/create-react-app).
 2. Copy folders: ```css```, ```images```, ```scripts``` from folder ```public``` to folder ```public``` in your react app, and folder ```src/optimajet-builder.js``` to ```src```
 3. Copy .eslintrc.json to root folder of  your react app:
-4. Include these imports to <body> of "public/index.html":
+4. Include these imports to ```<body>``` of "public/index.html":
 ```html
     <script src="scripts/jquery.js" type="text/javascript"></script>
     <script src="scripts/Chart.min.js" type="text/javascript"></script>
