@@ -35,7 +35,6 @@ class App extends React.Component {
       children: showViewer ? "Show Builder" : "Show Viewer"
     };
 
-
     return (
       <div className="App">
         <div {...headerProps}> <button {...buttonProps} /> </div>
