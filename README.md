@@ -1,16 +1,17 @@
-How integrate Form builder in your React (create-react-app) app:
+## How to integrate Form builder into your React (create-react-app) app:
 
 1. [Create React App](https://github.com/facebook/create-react-app).
-2. Copy folders: ```css```, ```images```, ```scripts``` to folder ```public``` in your react app, and folder ```src/optimajet-builder.js``` to ```src```
-3. Copy .eslintrc.json to root your react app:
-4. Include these imports to <body> of "public/index.html":
+2. Copy folders: ```css```, ```images```, ```scripts``` from folder ```public``` to folder ```public``` in your react app, and folder ```src/optimajet-builder.js``` to ```src```
+3. Copy .eslintrc.json to root folder of  your react app:
+4. Include these imports to ```<body>``` of "public/index.html":
 ```html
     <script src="scripts/jquery.js" type="text/javascript"></script>
     <script src="scripts/Chart.min.js" type="text/javascript"></script>
     <link href="css/semantic.min.css" rel="stylesheet" type="text/css" />
     <link href="css/optimajet-formbuilder.css" rel="stylesheet" type="text/css" />
-```
-5. Include these packages in package.json:
+```    
+5. Import { DWKitFormBuilder, DWKitFormViewer } from  "optimajet-builder.js" and use it in your app with props from "builder-viewer-props.js" (example in App.jsx)
+6. Include these packages in package.json:
 ```json
     "chart.js": "^3.5.1",
     "clone": "2.1.2",
@@ -37,8 +38,7 @@ How integrate Form builder in your React (create-react-app) app:
     "semantic-ui-react": "0.87.3",
     "uuid": "3.3.2"
 ```
-6. Run ```npm i --legacy-peer-deps```
-7. Import { DWKitFormBuilder, DWKitFormViewer } from  "optimajet-builder.js" and use it in your app with props from "builder-viewer-props.js" (example in App.jsx)
+7. Run ```npm i --legacy-peer-deps```
 8. Run ``` npm start```
 
 Done.
