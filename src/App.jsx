@@ -1,9 +1,5 @@
 import React from "react";
-import { DWKitFormBuilder, DWKitFormViewer } from "./optimajet-builder";
-import { builderProps, viewerProps } from "./builder-viewer-props";
-
-const HideIf = ({ condition, ...props }) => <div style={{ display: condition ? "none" : "initial" }} {...props} />
-
+import Builder from "./Builder";
 class App extends React.Component {
 
   builderRef = React.createRef();
@@ -11,38 +7,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showViewer: false,
-      model: undefined
+      splitBuilder: false,
     }
   }
 
-  componentDidMount() {
-    this.builderRef?.current?.load('./application-form');
-    this.setState({ dataurl: "./application-form-data.json" })
-  };
-
-  toggleViewMode = () => {
-    const model = this.builderRef?.current?.getData();
-    this.setState({ showViewer: !this.state.showViewer, model })
+  toggleSplitBuilder = () => {
+    this.setState({ splitBuilder: !this.state.splitBuilder })
   }
 
   render() {
-    const { model, showViewer, dataurl } = this.state;
-    const headerProps = { style: { display: "flex", justifyContent: "center", margin: 10 } };
-    const buttonProps = {
-      className: "ui button primary",
-      onClick: this.toggleViewMode,
-      children: showViewer ? "Show Builder" : "Show Viewer"
-    };
-
+    const { splitBuilder } = this.state;
+    const splitProps = {
+      isSplit: this.state.splitBuilder,
+      toggleSplit: this.toggleSplitBuilder
+    }
 
     return (
       <div className="App">
-        <div {...headerProps}> <button {...buttonProps} /> </div>
-        {showViewer && <DWKitFormViewer {...{ ...viewerProps, model, dataurl }} />}
-        <HideIf condition={showViewer}>
-          <DWKitFormBuilder {...builderProps} model={model} ref={this.builderRef} />
-        </HideIf>
+        <div className={("builders" + (splitBuilder ? " split" : ""))}>
+          <Builder {...splitProps}/>
+          {splitBuilder && <Builder {...splitProps}/>}
+        </div>
       </div>
     );
   }
